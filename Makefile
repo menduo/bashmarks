@@ -7,9 +7,10 @@ install:
 	@echo ""
 	mkdir -p $(INSTALL_DIR)
 	cp bashmarks.sh $(INSTALL_DIR)
+	@echo "source $(INSTALL_DIR)/bashmarks.sh"  >> ~/.bashrc
+	@echo "source $(INSTALL_DIR)/bashmarks.sh"  >> ~/.bash_profile
+	@echo "Please run 'source ~/.bash_profile' to use bashmarks "
 	@echo ""
-	@echo "Please add 'source $(INSTALL_DIR)/bashmarks.sh' to your .bashrc file"
-	@echo ''
 	@echo 'USAGE:'
 	@echo '------'
 	@echo 's <bookmark_name> - Saves the current directory as "bookmark_name"'
