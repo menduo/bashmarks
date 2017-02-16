@@ -66,6 +66,20 @@ function g {
     fi
 }
 
+# jump to bookmark
+function j {
+    check_help $1
+    source $SDIRS
+    target="$(eval $(echo echo $(echo \$DIR_$1)))"
+    if [ -d "$target" ]; then
+        cd "$target"
+    elif [ ! -n "$target" ]; then
+        echo -e "\033[${RED}WARNING: '${1}' bashmark does not exist\033[00m"
+    else
+        echo -e "\033[${RED}WARNING: '${target}' does not exist\033[00m"
+    fi
+}
+
 # print bookmark
 function p {
     check_help $1
@@ -159,11 +173,13 @@ function _purge_line {
 # bind completion command for g,p,d to _comp
 if [ $ZSH_VERSION ]; then
     compctl -K _compzsh g
+    compctl -K _compzsh j
     compctl -K _compzsh p
     compctl -K _compzsh d
 else
     shopt -s progcomp
     complete -F _comp g
+    complete -F _comp j
     complete -F _comp p
     complete -F _comp d
 fi
